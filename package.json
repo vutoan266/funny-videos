@@ -1,22 +1,24 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env NODE_ENV=production node server.js -p $PORT",
     "cypress": "cypress open",
     "integration-test": "start-server-and-test dev http://localhost:3000 cypress",
     "unit-test": "jest --watch",
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "classnames": "^2.3.1",
     "express": "^4.17.3",
     "mongoose": "^6.2.8",
     "next": "latest",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "zustand": "^3.7.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.3",
