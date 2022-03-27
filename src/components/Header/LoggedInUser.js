@@ -9,7 +9,9 @@ const LoggedInUser = () => {
       <div className="text-white mr-5">
         Welcome <b>tony@gmail.com</b>
       </div>
-      <Button className="mr-1">Share a movie</Button>
+      <Link href="/share">
+        <Button className="mr-1">Share a movie</Button>
+      </Link>
       <Button secondary>Logout</Button>
     </div>
   );

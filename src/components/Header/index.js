@@ -12,8 +12,8 @@ const Header = () => {
   };
 
   return (
-    <>
-      <nav className="flex items-center flex-wrap bg-black p-3 ">
+    <div className="w-full bg-black">
+      <nav className="flex items-center flex-wrap p-3 max-w-[992px] m-auto">
         <Link href="/">
           <a className="inline-flex items-center p-2 mr-4 ">
             <RiMovieFill className="fill-current text-yellow-500 h-8 w-8 mr-2" />
@@ -72,7 +72,7 @@ const Header = () => {
           </div>
         </div>
       </nav>
-    </>
+    </div>
   );
 };
 
