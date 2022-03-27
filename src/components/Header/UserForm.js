@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { registerAPI } from "../../apis";
+import useAlertStore from "../../store/alertStore";
 import useUserStore from "../../store/userStore";
 import Button from "../commons/Button";
 import Input from "../commons/Input";
@@ -9,18 +10,17 @@ const UserForm = () => {
   const login = useUserStore((state) => state.login);
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
-  const [error, setError] = React.useState(false);
+  const showAlert = useAlertStore((state) => state.show);
 
   const handleSubmit = async () => {
     if (!email || !password) {
-      setError("Please fill all fields");
+      showAlert("Please fill all fields");
     } else {
       try {
         await registerAPI({ email, password });
         login(email);
       } catch (e) {
-        console.log(e);
-        setError(e);
+        showAlert(e);
       }
     }
   };

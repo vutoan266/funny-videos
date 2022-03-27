@@ -1,5 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAllVideosAPI } from "../../apis";
+import VideoCard from "../../components/VideoCard";
 
 export default function ListPage() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  const [videos, setVideos] = useState();
+
+  useEffect(() => {
+    getAllVideosAPI().then((res) => {
+      setVideos(res);
+    });
+  }, []);
+
+  return (
+    <div className="max-w-[700px] my-10 mx-auto">
+      {!videos && "Loading.."}
+      {videos?.map((video) => (
+        <VideoCard key={video.url} data={video} />
+      ))}
+    </div>
+  );
 }

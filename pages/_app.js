@@ -1,3 +1,4 @@
+import Alert from "../src/components/Alert";
 import Header from "../src/components/Header";
 import "../styles/globals.css";
 
@@ -6,6 +7,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Header />
       <Component {...pageProps} />
+      <Alert />
     </>
   );
 }

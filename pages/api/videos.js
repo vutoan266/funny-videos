@@ -43,13 +43,12 @@ export default async function videoHandler(req, res) {
         const newVideo = new Video({
           url,
           shared_by,
-          videoId: id,
+          video_id: id,
           title,
           description,
         });
         newVideo.save((err) => {
           if (err) {
-            console.log(err);
             res.status(200).json({ result: "error", message: "DB save error" });
           } else {
             res.status(200).json({ result: "success", data: newVideo });

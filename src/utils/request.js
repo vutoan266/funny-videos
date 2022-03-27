@@ -6,7 +6,7 @@ const get = (url, params) =>
         return resObj.data;
       } else throw new Error(resObj.message);
     } else {
-      throw new Error(resObj);
+      throw resObj.message;
     }
   });
 
@@ -22,9 +22,9 @@ const post = (url, data) =>
     if (response.status === 200) {
       if (resObj.result === "success") {
         return resObj.data;
-      } else throw new Error(resObj.message);
+      } else throw resObj.message;
     } else {
-      throw new Error(resObj);
+      throw resObj.message;
     }
   });
 

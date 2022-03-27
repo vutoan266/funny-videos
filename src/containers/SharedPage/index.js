@@ -1,17 +1,32 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import { shareVideoAPI } from "../../apis";
 import Button from "../../components/commons/Button";
 import Input from "../../components/commons/Input";
+import useAlertStore from "../../store/alertStore";
 import useUserStore from "../../store/userStore";
 
 export default function SharePage() {
   const [url, setUrl] = React.useState();
   const user = useUserStore((state) => state.user);
+  const router = useRouter();
+  const showAlert = useAlertStore((state) => state.show);
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+  }, [user, router]);
 
   const handleSubmit = async () => {
+    if (!url) showAlert("Please fill URL");
     if (url) {
-      await shareVideoAPI({ url: url, shared_by: user?.email });
-      setUrl("");
+      try {
+        await shareVideoAPI({ url: url, shared_by: user?.email });
+        setUrl("");
+      } catch (e) {
+        showAlert(e);
+      }
     }
   };
 
