@@ -1,6 +1,8 @@
 import User from "../../src/models/user";
+import dbConnect from "../../src/utils/dbConnect";
 
-export default function userHandler(req, res) {
+export default async function userHandler(req, res) {
+  await dbConnect();
   const {
     body: { email, password },
     method,

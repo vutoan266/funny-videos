@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next dev",
     "build": "next build",
-    "start": "cross-env NODE_ENV=production node server.js -p $PORT",
+    "start": "next start",
     "cypress": "cypress open",
     "integration-test": "start-server-and-test dev http://localhost:3000 cypress",
     "unit-test": "jest --watch",

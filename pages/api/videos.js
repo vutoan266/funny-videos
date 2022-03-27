@@ -1,8 +1,10 @@
 import Video from "../../src/models/video";
 import apiRequest from "../../src/utils/apiRequest";
+import dbConnect from "../../src/utils/dbConnect";
 import { getYoutubeVideoId } from "../../src/utils/utils";
 
 export default async function videoHandler(req, res) {
+  await dbConnect();
   const {
     body: { url, shared_by },
     method,
