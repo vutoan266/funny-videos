@@ -10,7 +10,7 @@ export default function SharePage() {
   const [url, setUrl] = React.useState();
   const user = useUserStore((state) => state.user);
   const router = useRouter();
-  const showAlert = useAlertStore((state) => state.show);
+  const { showError, show } = useAlertStore((state) => state);
 
   useEffect(() => {
     if (!user) {
@@ -19,13 +19,15 @@ export default function SharePage() {
   }, [user, router]);
 
   const handleSubmit = async () => {
-    if (!url) showAlert("Please fill URL");
+    if (!url) showError("Please fill URL");
+
     if (url) {
       try {
         await shareVideoAPI({ url: url, shared_by: user?.email });
         setUrl("");
+        show("Shared successfully");
       } catch (e) {
-        showAlert(e);
+        showError(e);
       }
     }
   };

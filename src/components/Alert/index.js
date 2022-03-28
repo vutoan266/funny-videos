@@ -3,7 +3,7 @@ import classNames from "classnames";
 import useAlertStore from "../../store/alertStore";
 
 const Alert = () => {
-  const { message, show, hide } = useAlertStore((state) => state);
+  const { message, error, hide } = useAlertStore((state) => state);
 
   useEffect(() => {
     if (message) {
@@ -13,13 +13,19 @@ const Alert = () => {
     }
   }, [message, hide]);
 
-  if (!message) return null;
+  if (!message && !error) return null;
   return (
     <div
-      className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded fixed top-[100px] right-[20px] w-[300px]"
+      className={classNames(
+        "px-4 py-3 rounded fixed top-[100px] right-[20px] w-[300px]",
+        {
+          "bg-red-100 border border-red-400 text-red-700": error,
+          "bg-green-100 border border-green-400 text-green-700": message,
+        }
+      )}
       role="alert"
     >
-      <span className="block sm:inline">{message}</span>
+      <span className="block sm:inline">{message || error}</span>
       <span
         className="absolute top-0 bottom-0 right-0 px-4 py-3"
         onClick={hide}
